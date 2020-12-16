@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE version SYSTEM "../../../lib/pkp/dtd/pluginVersion.dtd">
+
+<!--
+  *
+  * Copyright (c) 2020 Lepidus Tecnologia
+  * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+  *
+  -->
+
+<version>
+	<application>PluginUpdateNotificationPlugin</application>
+	<type>plugins.generic</type>
+	<lazy-load>0</lazy-load>
+	<release>1.0.0.0</release>
+	<date>2020-12-16</date>
+</version>
+
