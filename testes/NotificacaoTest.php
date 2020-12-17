@@ -8,25 +8,29 @@ class NotificacaoTest extends TestCase {
     private $pluginsVariasAtualizacoes = ["ORCID Profile", "Backup", "Default Translation"];
 
     public function testeNotificacaoUmaAtualizacao(): void {
-        $notificacao = new Notificacao($this->pluginsUmaAtualizacao);
+        $tradutorTestes = new TradutorTestes();
+        $notificacao = new Notificacao($this->pluginsUmaAtualizacao, $tradutorTestes);
         $textoEsperado = "Os seguintes plugins possuem atualizações disponíveis: ORCID Profile";
         $this->assertEquals($textoEsperado, $notificacao->obterTextoNotificacao('pt_BR'));
     }
 
     public function testeNotificacaoVariasAtualizacoes(): void {
-        $notificacao = new Notificacao($this->pluginsVariasAtualizacoes);
+        $tradutorTestes = new TradutorTestes();
+        $notificacao = new Notificacao($this->pluginsVariasAtualizacoes, $tradutorTestes);
         $textoEsperado = "Os seguintes plugins possuem atualizações disponíveis: ORCID Profile, Backup, Default Translation";
         $this->assertEquals($textoEsperado, $notificacao->obterTextoNotificacao('pt_BR'));
     }
 
     public function testeNotificacaoUmaAtualizacaoTraduzida(): void {
-        $notificacao = new Notificacao($this->pluginsUmaAtualizacao);
+        $tradutorTestes = new TradutorTestes();
+        $notificacao = new Notificacao($this->pluginsUmaAtualizacao, $tradutorTestes);
         $textoEsperado = "The following plugins have updates available: ORCID Profile";
         $this->assertEquals($textoEsperado, $notificacao->obterTextoNotificacao('en_US'));
     }
 
     public function testeNotificacaoVariasAtualizacoesTraduzida(): void {
-        $notificacao = new Notificacao($this->pluginsVariasAtualizacoes);
+        $tradutorTestes = new TradutorTestes();
+        $notificacao = new Notificacao($this->pluginsVariasAtualizacoes, $tradutorTestes);
         $textoEsperado = "The following plugins have updates available: ORCID Profile, Backup, Default Translation";
         $this->assertEquals($textoEsperado, $notificacao->obterTextoNotificacao('en_US'));
     }

@@ -8,6 +8,9 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'notificacao' => '/classes/Notificacao.inc.php',
+                'tradutor' => '/classes/Tradutor.inc.php',
+                'tradutortestes' => '/classes/TradutorTestes.inc.php',
+                'tradutorpkp' => '/classes/TradutorPKP.inc.php',
             );
         }
         $cn = strtolower($class);
