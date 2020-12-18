@@ -7,10 +7,10 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
-                'notificacao' => '/classes/Notificacao.inc.php',
-                'tradutor' => '/classes/Tradutor.inc.php',
-                'tradutortestes' => '/classes/TradutorTestes.inc.php',
-                'tradutorpkp' => '/classes/TradutorPKP.inc.php',
+                'notificacao' => '/Notificacao.inc.php',
+                'tradutorpluginnotificacao' => '/TradutorPluginNotificacao.inc.php',
+                'tradutortestes' => '/TradutorTestes.inc.php',
+                'tradutorpkp' => '/TradutorPKP.inc.php',
             );
         }
         $cn = strtolower($class);
