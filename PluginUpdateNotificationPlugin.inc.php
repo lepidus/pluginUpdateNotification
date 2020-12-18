@@ -13,7 +13,9 @@
  */
 
 import('lib.pkp.classes.plugins.GenericPlugin');
-import('classes.submission.Submission');
+import('plugins.generic.pluginUpdateNotification.classes.TradutorPluginNotificacao');
+import('plugins.generic.pluginUpdateNotification.classes.TradutorPKP');
+import('plugins.generic.pluginUpdateNotification.classes.Notificacao');
 
 class PluginUpdateNotificationPlugin extends GenericPlugin {
     public function register($category, $path, $mainContextId = NULL) {
@@ -22,8 +24,9 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
         if (!Config::getVar('general', 'installed') || defined('RUNNING_UPGRADE'))
             return true;
         
-        /*if ($success && $this->getEnabled($mainContextId)) {
-        }*/
+        if ($success && $this->getEnabled($mainContextId)) {
+			HookRegistry::register('Template::Settings::website', array($this, 'verificaAtualizacoesPlugins'));
+        }
         
         return $success;
     }
@@ -34,5 +37,30 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
 
 	public function getDescription() {
 		return __('plugins.generic.pluginUpdateNotification.description');
-    }
+	}
+	
+	public function verificaAtualizacoesPlugins($hookName, $params) {
+		$smarty =& $params[1];
+		$output =& $params[2];
+		$locale = AppLocale::getLocale();
+		
+		$pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
+		$pluginsGaleria = $pluginGalleryDao->getNewestCompatible(Application::get());
+		$nomesPluginsAtualizaveis = array();
+		
+		foreach($pluginsGaleria as $plugin) {
+			if($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
+				$nomesPluginsAtualizaveis[] = $plugin->getLocalizedName();
+			}
+		}
+		
+		if(!empty($nomesPluginsAtualizaveis)) {
+			$tradutor = new TradutorPKP();
+			$notificacao = new Notificacao($nomesPluginsAtualizaveis, $tradutor);
+			$smarty->assign([
+				'textoNotificacao' => $notificacao->obterTextoNotificacao($locale)
+			]);
+			$output .= sprintf('%s', $smarty->fetch($this->getTemplateResource('notificacaoAtualizacaoPlugins.tpl')));
+		}
+	}
 }
