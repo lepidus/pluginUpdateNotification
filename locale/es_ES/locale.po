@@ -16,3 +16,6 @@ msgstr "Notificación de actualización del módulo"
 
 msgid "plugins.generic.pluginUpdateNotification.description"
 msgstr "Este módulo genera una notificación cada vez que se encuentra disponible una actualización de un módulo de la galería"
+
+msgid "plugins.generic.pluginUpdateNotification.messageNotification"
+msgstr "Los siguientes módulos tienen actualizaciones disponibles: {$stringPlugins}"

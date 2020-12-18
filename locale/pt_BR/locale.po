@@ -16,3 +16,6 @@ msgstr "Notificação de atualização de plugins"
 
 msgid "plugins.generic.pluginUpdateNotification.description"
 msgstr "Este plugin gera uma notificação sempre que há uma atualização disponível de um plugin da galeria"
+
+msgid "plugins.generic.pluginUpdateNotification.messageNotification"
+msgstr "Os seguintes plugins possuem atualizações disponíveis: {$stringPlugins}"

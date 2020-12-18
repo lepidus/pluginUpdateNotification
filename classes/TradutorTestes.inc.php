@@ -16,7 +16,7 @@ class TradutorTestes implements Tradutor {
     public function traduzir($chave, $locale, $params = null) {
         $mapeamento = $this->mapeamentoTraducao[$locale];
         if($params)
-            return str_replace("?", $params, $mapeamento[$chave]);
+            return str_replace("?", $params['stringPlugins'], $mapeamento[$chave]);
         
         return $mapeamento[$chave];
     }
