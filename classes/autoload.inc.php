@@ -8,9 +8,9 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'notificacao' => '/Notificacao.inc.php',
-                'tradutorpluginnotificacao' => '/TradutorPluginNotificacao.inc.php',
-                'tradutortestes' => '/TradutorTestes.inc.php',
-                'tradutorpkp' => '/TradutorPKP.inc.php',
+                'tradutornotificacao' => '/TradutorNotificacao.inc.php',
+                'tradutornotificacaotestes' => '/TradutorNotificacaoTestes.inc.php',
+                'tradutornotificacaopkp' => '/TradutorNotificacaoPKP.inc.php',
             );
         }
         $cn = strtolower($class);

@@ -1,6 +1,6 @@
 <?php
 
-class TradutorTestes implements TradutorPluginNotificacao {
+class TradutorNotificacaoTestes implements TradutorNotificacao {
     private $mapeamentoTraducao;
 
     public function __construct() {

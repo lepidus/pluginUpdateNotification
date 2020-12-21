@@ -13,8 +13,8 @@
  */
 
 import('lib.pkp.classes.plugins.GenericPlugin');
-import('plugins.generic.pluginUpdateNotification.classes.TradutorPluginNotificacao');
-import('plugins.generic.pluginUpdateNotification.classes.TradutorPKP');
+import('plugins.generic.pluginUpdateNotification.classes.TradutorNotificacao');
+import('plugins.generic.pluginUpdateNotification.classes.TradutorNotificacaoPKP');
 import('plugins.generic.pluginUpdateNotification.classes.Notificacao');
 
 class PluginUpdateNotificationPlugin extends GenericPlugin {
@@ -55,7 +55,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
 		}
 		
 		if(!empty($nomesPluginsAtualizaveis)) {
-			$tradutor = new TradutorPKP();
+			$tradutor = new TradutorNotificacaoPKP();
 			$notificacao = new Notificacao($nomesPluginsAtualizaveis, $tradutor);
 			$smarty->assign([
 				'textoNotificacao' => $notificacao->obterTextoNotificacao($locale)
