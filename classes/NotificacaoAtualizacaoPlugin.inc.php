@@ -1,6 +1,6 @@
 <?php
 
-class Notificacao {
+class NotificacaoAtualizacaoPlugin {
     private $pluginsAtualizaveis;
     private $tradutor;
 
