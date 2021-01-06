@@ -44,15 +44,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
 		$output =& $params[2];
 		$locale = AppLocale::getLocale();
 		
-		$pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
-		$pluginsGaleria = $pluginGalleryDao->getNewestCompatible(Application::get());
-		$nomesPluginsAtualizaveis = array();
-		
-		foreach($pluginsGaleria as $plugin) {
-			if($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
-				$nomesPluginsAtualizaveis[] = $plugin->getLocalizedName();
-			}
-		}
+		$nomesPluginsAtualizaveis = $this->obtemPluginsAtualizaveis();
 		
 		if(!empty($nomesPluginsAtualizaveis)) {
 			$tradutor = new TradutorNotificacaoPKP();
@@ -62,5 +54,19 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
 			]);
 			$output .= sprintf('%s', $smarty->fetch($this->getTemplateResource('notificacaoAtualizacaoPlugins.tpl')));
 		}
+	}
+
+	private function obtemPluginsAtualizaveis() {
+		$pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
+		$pluginsGaleria = $pluginGalleryDao->getNewestCompatible(Application::get());
+		$nomesPluginsAtualizaveis = array();
+		
+		foreach($pluginsGaleria as $plugin) {
+			if($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
+				$nomesPluginsAtualizaveis[] = $plugin->getLocalizedName();
+			}
+		}
+
+		return $nomesPluginsAtualizaveis;
 	}
 }
