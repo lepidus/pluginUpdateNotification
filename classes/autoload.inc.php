@@ -7,10 +7,10 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
-                'notificacaoatualizacaoplugin' => '/NotificacaoAtualizacaoPlugin.inc.php',
-                'tradutornotificacao' => '/TradutorNotificacao.inc.php',
-                'tradutornotificacaotestes' => '/TradutorNotificacaoTestes.inc.php',
-                'tradutornotificacaopkp' => '/TradutorNotificacaoPKP.inc.php',
+                'updatenotificationplugin' => '/UpdateNotificationPlugin.inc.php',
+                'notificationtranslator' => '/NotificationTranslator.inc.php',
+                'notificationtranslatortests' => '/NotificationTranslatorTests.inc.php',
+                'notificationtranslatorpkp' => '/NotificationTranslatorPKP.inc.php',
             );
         }
         $cn = strtolower($class);

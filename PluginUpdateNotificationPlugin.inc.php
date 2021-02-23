@@ -13,9 +13,9 @@
  */
 
 import('lib.pkp.classes.plugins.GenericPlugin');
-import('plugins.generic.pluginUpdateNotification.classes.TradutorNotificacao');
-import('plugins.generic.pluginUpdateNotification.classes.TradutorNotificacaoPKP');
-import('plugins.generic.pluginUpdateNotification.classes.NotificacaoAtualizacaoPlugin');
+import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslator');
+import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslatorPKP');
+import('plugins.generic.pluginUpdateNotification.classes.UpdateNotificationPlugin');
 
 class PluginUpdateNotificationPlugin extends GenericPlugin {
     public function register($category, $path, $mainContextId = NULL) {
@@ -25,7 +25,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
             return true;
         
         if ($success && $this->getEnabled($mainContextId)) {
-			HookRegistry::register('Template::Settings::website', array($this, 'verificaAtualizacoesPlugins'));
+			HookRegistry::register('Template::Settings::website', array($this, 'checkUpdatesPlugins'));
         }
         
         return $success;
@@ -39,34 +39,34 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
 		return __('plugins.generic.pluginUpdateNotification.description');
 	}
 	
-	public function verificaAtualizacoesPlugins($hookName, $params) {
+	public function checkUpdatesPlugins($hookName, $params) {
 		$smarty =& $params[1];
 		$output =& $params[2];
 		$locale = AppLocale::getLocale();
 		
-		$nomesPluginsAtualizaveis = $this->obtemPluginsAtualizaveis();
+		$updatePluginsNames = $this->getUpdatePlugins();
 		
-		if(!empty($nomesPluginsAtualizaveis)) {
-			$tradutor = new TradutorNotificacaoPKP();
-			$notificacao = new NotificacaoAtualizacaoPlugin($nomesPluginsAtualizaveis, $tradutor);
+		if(!empty($updatePluginsNames)) {
+			$tradutor = new NotificationTranslatorPKP();
+			$notification = new UpdateNotificationPlugin($updatePluginsNames, $tradutor);
 			$smarty->assign([
-				'textoNotificacao' => $notificacao->obterTextoNotificacao($locale)
+				'notificationText' => $notification->getNotificationText($locale)
 			]);
-			$output .= sprintf('%s', $smarty->fetch($this->getTemplateResource('notificacaoAtualizacaoPlugins.tpl')));
+			$output .= sprintf('%s', $smarty->fetch($this->getTemplateResource('updateNotificationPlugins.tpl')));
 		}
 	}
 
-	private function obtemPluginsAtualizaveis() {
+	private function getUpdatePlugins() {
 		$pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
-		$pluginsGaleria = $pluginGalleryDao->getNewestCompatible(Application::get());
-		$nomesPluginsAtualizaveis = array();
+		$pluginsGallery = $pluginGalleryDao->getNewestCompatible(Application::get());
+		$updatePluginsNames = array();
 		
-		foreach($pluginsGaleria as $plugin) {
+		foreach($pluginsGallery as $plugin) {
 			if($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
-				$nomesPluginsAtualizaveis[] = $plugin->getLocalizedName();
+				$updatePluginsNames[] = $plugin->getLocalizedName();
 			}
 		}
 
-		return $nomesPluginsAtualizaveis;
+		return $updatePluginsNames;
 	}
 }
