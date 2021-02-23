@@ -5,6 +5,11 @@
 <script>
     var div = document.getElementById('updateNotificationPlugins');
     var title = document.getElementsByClassName('pkp_page_title')[0];
+    
+    if(!title){ldelim}
+        title = document.getElementsByClassName('app__pageHeading')[0];
+    {rdelim}
+    
     title.parentNode.insertBefore(div, title.nextSibling);
 </script>
 
