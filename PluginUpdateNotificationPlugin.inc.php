@@ -4,7 +4,8 @@
  * @file plugins/reports/scieloSubmissions/PluginUpdateNotificationPlugin.inc.php
  *
  * Copyright (c) 2020 Lepidus Tecnologia
- * Distributed under the GNU GPL v2. For full terms see the file docs/COPYING.
+ * Copyright (c) 2020-2021 SciELO
+ * Distributed under the GNU GPL v3. For full terms see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt.
  *
  * @class PluginUpdateNotificationPlugin
  * @ingroup plugins_generic_pluginUpdateNotification
