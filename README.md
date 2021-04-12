@@ -1,4 +1,4 @@
-# SciELO Submissions Report Plugin 
+# Update Notification Plugin 
 
 This plugin **notifies** on *OJS/OPS* interface when a plugin from pkp gallery has a update required. 
 
