@@ -1,6 +1,6 @@
-# Update Notification Plugin 
+# Plugin's Update Notification Plugin 
 
-This plugin **notifies** on *OJS/OPS* interface when a plugin from pkp gallery has a update required. 
+This plugin generates a notification in `Settings`>` Website` informing all the gallery plugins that have an update at the moment.
 
 ## Compatibility
 
@@ -25,6 +25,6 @@ To download the plugin, go to the [Releases page](https://github.com/lepidus/plu
 # License
 __This plugin is licensed under the GNU General Public License v3.0__
 
-__Copyright (c) 2019-2021 Lepidus Tecnologia__
+__Copyright (c) 2021 Lepidus Tecnologia__
 
-__Copyright (c) 2020-2021 SciELO__
+__Copyright (c) 2021 SciELO__

@@ -7,8 +7,8 @@
 /**
  * @file plugins/reports/scieloSubmissions/index.php
  *
- * Copyright (c) 2020 Lepidus Tecnologia
- * Copyright (c) 2020-2021 SciELO
+ * Copyright (c) 2021 Lepidus Tecnologia
+ * Copyright (c) 2021 SciELO
  * Distributed under the GNU GPL v3. For full terms see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt.
  *
  * @ingroup plugins_generic_pluginUpdateNotification
