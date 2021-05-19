@@ -7,7 +7,7 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
-                'updatenotificationplugin' => '/UpdateNotificationPlugin.inc.php',
+                'pluginupdatenotification' => '/PluginUpdateNotification.inc.php',
                 'notificationtranslator' => '/NotificationTranslator.inc.php',
                 'notificationtranslatortests' => '/NotificationTranslatorTests.inc.php',
                 'notificationtranslatorpkp' => '/NotificationTranslatorPKP.inc.php',

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/reports/scieloSubmissions/PluginUpdateNotificationPlugin.inc.php
+ * @file plugins/reports/pluginUpdateNotification/PluginUpdateNotificationPlugin.inc.php
  *
  * Copyright (c) 2021 Lepidus Tecnologia
  * Copyright (c) 2021 SciELO
@@ -16,7 +16,7 @@
 import('lib.pkp.classes.plugins.GenericPlugin');
 import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslator');
 import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslatorPKP');
-import('plugins.generic.pluginUpdateNotification.classes.UpdateNotificationPlugin');
+import('plugins.generic.pluginUpdateNotification.classes.PluginUpdateNotification');
 
 class PluginUpdateNotificationPlugin extends GenericPlugin {
     public function register($category, $path, $mainContextId = NULL) {
@@ -31,8 +31,8 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
         
         return $success;
     }
-
-    public function getDisplayName() {
+	
+	public function getDisplayName() {
 		return __('plugins.generic.pluginUpdateNotification.displayName');
 	}
 
@@ -49,7 +49,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin {
 		
 		if(!empty($updatePluginsNames)) {
 			$tradutor = new NotificationTranslatorPKP();
-			$notification = new UpdateNotificationPlugin($updatePluginsNames, $tradutor);
+			$notification = new PluginUpdateNotification($updatePluginsNames, $tradutor);
 			$smarty->assign([
 				'notificationText' => $notification->getNotificationText($locale)
 			]);

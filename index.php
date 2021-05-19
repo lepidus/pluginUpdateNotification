@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @defgroup plugins_generic_PluginUpdateNotification Plugin Update Notification Plugin
+ * @defgroup plugins_generic_pluginUpdateNotification Plugin Update Notification Plugin
  */
- 
+
 /**
- * @file plugins/reports/scieloSubmissions/index.php
+ * @file plugins/reports/pluginUpdateNotification/index.php
  *
  * Copyright (c) 2021 Lepidus Tecnologia
  * Copyright (c) 2021 SciELO
