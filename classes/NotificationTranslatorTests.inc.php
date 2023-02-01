@@ -1,5 +1,7 @@
 <?php
 
+import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslator');
+
 class NotificationTranslatorTests implements NotificationTranslator {
     private $mappingTranslation;
 
