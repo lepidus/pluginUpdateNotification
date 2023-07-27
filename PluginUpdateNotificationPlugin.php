@@ -19,6 +19,8 @@ use PKP\plugins\Hook;
 use PKP\plugins\GenericPlugin;
 use PKP\config\Config;
 use PKP\facades\Locale;
+use PKP\db\DAORegistry;
+use APP\core\Application;
 
 class PluginUpdateNotificationPlugin extends GenericPlugin
 {
