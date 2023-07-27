@@ -1,6 +1,6 @@
 <?php
 
-import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslator');
+namespace APP\plugins\generic\pluginUpdateNotification\classes;
 
 class NotificationTranslatorTests implements NotificationTranslator
 {

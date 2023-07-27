@@ -10,13 +10,13 @@
  * @class PluginUpdateNotificationPlugin
  * @ingroup plugins_generic_pluginUpdateNotification
  *
- * @brief Plugin Update Notification Plugin
+ * @brief 'Plugin Update Notification' plugin
  */
 
-import('lib.pkp.classes.plugins.GenericPlugin');
-import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslator');
-import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslatorPKP');
-import('plugins.generic.pluginUpdateNotification.classes.PluginUpdateNotification');
+namespace APP\plugins\generic\pluginUpdateNotification;
+
+use PKP\plugins\GenericPlugin;
+use APP\plugins\generic\pluginUpdateNotification\classes;
 
 class PluginUpdateNotificationPlugin extends GenericPlugin
 {

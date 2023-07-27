@@ -1,5 +1,7 @@
 <?php
 
+namespace APP\plugins\generic\pluginUpdateNotification\classes;
+
 class PluginUpdateNotification
 {
     private $upgradeablePlugins;

@@ -1,8 +1,7 @@
 <?php
 
-import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslatorTests');
-import('plugins.generic.pluginUpdateNotification.classes.PluginUpdateNotification');
-
+use APP\plugins\generic\pluginUpdateNotification\classes\NotificationTranslatorTests;
+use APP\plugins\generic\pluginUpdateNotification\classes\PluginUpdateNotification;
 use PHPUnit\Framework\TestCase;
 
 class NotificationTest extends TestCase
