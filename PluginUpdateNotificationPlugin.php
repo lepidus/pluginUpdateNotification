@@ -3,8 +3,8 @@
 /**
  * @file plugins/reports/pluginUpdateNotification/PluginUpdateNotificationPlugin.inc.php
  *
- * Copyright (c) 2021 Lepidus Tecnologia
- * Copyright (c) 2021 SciELO
+ * Copyright (c) 2023 Lepidus Tecnologia
+ * Copyright (c) 2023 SciELO
  * Distributed under the GNU GPL v3. For full terms see LICENSE or https://www.gnu.org/licenses/gpl-3.0.txt.
  *
  * @class PluginUpdateNotificationPlugin
@@ -15,8 +15,10 @@
 
 namespace APP\plugins\generic\pluginUpdateNotification;
 
+use PKP\plugins\Hook;
 use PKP\plugins\GenericPlugin;
-use APP\plugins\generic\pluginUpdateNotification\classes;
+use PKP\config\Config;
+use PKP\facades\Locale;
 
 class PluginUpdateNotificationPlugin extends GenericPlugin
 {
@@ -29,7 +31,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         }
 
         if ($success && $this->getEnabled($mainContextId)) {
-            HookRegistry::register('Template::Settings::website', array($this, 'checkUpdatesPlugins'));
+            Hook::add('Template::Settings::website', array($this, 'checkUpdatesPlugins'));
         }
 
         return $success;
@@ -49,7 +51,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
     {
         $smarty =& $params[1];
         $output =& $params[2];
-        $locale = AppLocale::getLocale();
+        $locale = Locale::getLocale();
 
         $updatePluginsNames = $this->getUpdatePlugins();
 
