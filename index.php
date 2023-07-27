@@ -14,10 +14,8 @@
  * @ingroup plugins_generic_pluginUpdateNotification
  * @brief Wrapper for plugin update notification plugin.
  *
- */ 
+ */
 
 require_once('PluginUpdateNotificationPlugin.inc.php');
 
 return new PluginUpdateNotificationPlugin();
-
-
