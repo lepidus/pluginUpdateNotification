@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @file plugins/reports/pluginUpdateNotification/PluginUpdateNotificationPlugin.inc.php
+ * @file plugins/reports/pluginUpdateNotification/PluginUpdateNotificationPlugin.php
  *
  * Copyright (c) 2023 Lepidus Tecnologia
  * Copyright (c) 2023 SciELO
@@ -18,9 +18,9 @@ namespace APP\plugins\generic\pluginUpdateNotification;
 use PKP\plugins\Hook;
 use PKP\plugins\GenericPlugin;
 use PKP\config\Config;
-use PKP\facades\Locale;
 use PKP\db\DAORegistry;
 use APP\core\Application;
+use APP\plugins\generic\pluginUpdateNotification\classes\PluginUpdateNotification;
 
 class PluginUpdateNotificationPlugin extends GenericPlugin
 {
@@ -33,7 +33,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         }
 
         if ($success && $this->getEnabled($mainContextId)) {
-            Hook::add('Template::Settings::website', array($this, 'checkUpdatesPlugins'));
+            Hook::add('Template::Settings::website', array($this, 'websiteSettingsCallback'));
         }
 
         return $success;
@@ -49,25 +49,22 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         return __('plugins.generic.pluginUpdateNotification.description');
     }
 
-    public function checkUpdatesPlugins($hookName, $params)
+    public function websiteSettingsCallback($hookName, $params)
     {
         $smarty =& $params[1];
         $output =& $params[2];
-        $locale = Locale::getLocale();
 
-        $updatePluginsNames = $this->getUpdatePlugins();
-
-        if(!empty($updatePluginsNames)) {
-            $tradutor = new NotificationTranslatorPKP();
-            $notification = new PluginUpdateNotification($updatePluginsNames, $tradutor);
+        $pluginsToUpdate = $this->getUpgradablePlugins();
+        if(!empty($pluginsToUpdate)) {
+            $notification = new PluginUpdateNotification($pluginsToUpdate);
             $smarty->assign([
-                'notificationText' => $notification->getNotificationText($locale)
+                'notificationText' => $notification->getNotificationText()
             ]);
             $output .= sprintf('%s', $smarty->fetch($this->getTemplateResource('updateNotificationPlugins.tpl')));
         }
     }
 
-    private function getUpdatePlugins()
+    private function getUpgradablePlugins()
     {
         $pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
         $pluginsGallery = $pluginGalleryDao->getNewestCompatible(Application::get());

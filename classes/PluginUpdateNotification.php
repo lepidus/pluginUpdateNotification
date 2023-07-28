@@ -2,22 +2,25 @@
 
 namespace APP\plugins\generic\pluginUpdateNotification\classes;
 
+use PKP\facades\Locale;
+
 class PluginUpdateNotification
 {
     private $upgradeablePlugins;
-    private $translator;
 
-    public function __construct($listPlugins, $translator)
+    public function __construct($pluginsList)
     {
-        $this->upgradeablePlugins = $listPlugins;
-        $this->translator = $translator;
+        $this->upgradeablePlugins = $pluginsList;
     }
 
-    public function getNotificationText($locale)
+    public function getNotificationText($locale = null)
     {
         $stringPlugins = implode(", ", $this->upgradeablePlugins);
-        $notificationText = $this->translator->translate('plugins.generic.pluginUpdateNotification.messageNotification', $locale, ['stringPlugins' => $stringPlugins]);
 
-        return $notificationText;
+        if (is_null($locale)) {
+            $locale = Locale::getLocale();
+        }
+
+        return __('plugins.generic.pluginUpdateNotification.messageNotification', ['stringPlugins' => $stringPlugins], $locale);
     }
 }
