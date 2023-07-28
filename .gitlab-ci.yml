@@ -6,4 +6,3 @@ include:
     ref: main
     file:
       - 'templates/groups/pkp_plugin.yml'
-      - 'templates/groups/ops_plugins_unit_tests_model.yml'
