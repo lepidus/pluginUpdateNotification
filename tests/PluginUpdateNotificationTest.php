@@ -6,7 +6,7 @@ use APP\plugins\generic\pluginUpdateNotification\classes\PluginUpdateNotificatio
 use PKP\tests\PKPTestCase;
 use PKP\facades\Locale;
 
-class NotificationTest extends PKPTestCase
+class PluginUpdateNotificationTest extends PKPTestCase
 {
     private $onePluginUpdate = ["ORCID Profile"];
     private $manyPluginUpdates = ["ORCID Profile", "Backup", "Default Translation"];
