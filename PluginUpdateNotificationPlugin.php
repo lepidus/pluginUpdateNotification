@@ -79,3 +79,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         return $updatePluginsNames;
     }
 }
+
+if (!PKP_STRICT_MODE) {
+    class_alias('\APP\plugins\generic\pluginUpdateNotification\PluginUpdateNotificationPlugin', '\PluginUpdateNotificationPlugin');
+}
