@@ -1,43 +1,45 @@
 <?php
 
-use APP\plugins\generic\pluginUpdateNotification\classes\NotificationTranslatorTests;
-use APP\plugins\generic\pluginUpdateNotification\classes\PluginUpdateNotification;
-use PHPUnit\Framework\TestCase;
+namespace APP\plugins\generic\pluginUpdateNotification\tests;
 
-class NotificationTest extends TestCase
+use APP\plugins\generic\pluginUpdateNotification\classes\PluginUpdateNotification;
+use PKP\tests\PKPTestCase;
+use PKP\facades\Locale;
+
+class NotificationTest extends PKPTestCase
 {
-    private $oneUpdatePlugins = ["ORCID Profile"];
-    private $manyUpdatePlugins = ["ORCID Profile", "Backup", "Default Translation"];
+    private $onePluginUpdate = ["ORCID Profile"];
+    private $manyPluginUpdates = ["ORCID Profile", "Backup", "Default Translation"];
 
     public function testOneNotificationUpdate(): void
     {
-        $translatorTests = new NotificationTranslatorTests();
-        $notification = new PluginUpdateNotification($this->oneUpdatePlugins, $translatorTests);
+        $notification = new PluginUpdateNotification($this->onePluginUpdate);
         $expectedText = "Os seguintes plugins possuem atualizações disponíveis: ORCID Profile";
-        $this->assertEquals($expectedText, $notification->getNotificationText('pt_BR'));
+        Locale::setLocale('pt_BR');
+        self::assertEquals($expectedText, $notification->getNotificationText());
     }
 
     public function testManyNotificationUpdates(): void
     {
-        $translatorTests = new NotificationTranslatorTests();
-        $notification = new PluginUpdateNotification($this->manyUpdatePlugins, $translatorTests);
+        $notification = new PluginUpdateNotification($this->manyPluginUpdates);
         $expectedText = "Os seguintes plugins possuem atualizações disponíveis: ORCID Profile, Backup, Default Translation";
-        $this->assertEquals($expectedText, $notification->getNotificationText('pt_BR'));
+        Locale::setLocale('pt_BR');
+        self::assertEquals($expectedText, $notification->getNotificationText());
     }
 
     public function testOneNotificationUpdateTranslated(): void
     {
-        $translatorTests = new NotificationTranslatorTests();
-        $notification = new PluginUpdateNotification($this->oneUpdatePlugins, $translatorTests);
+        $notification = new PluginUpdateNotification($this->onePluginUpdate);
         $expectedText = "The following plugins have updates available: ORCID Profile";
-        $this->assertEquals($expectedText, $notification->getNotificationText('en_US'));
+        Locale::setLocale('en');
+        self::assertEquals($expectedText, $notification->getNotificationText());
     }
 
     public function testManyUpdateNotificationTranslated(): void
     {
-        $translatorTests = new NotificationTranslatorTests();
-        $notification = new PluginUpdateNotification($this->manyUpdatePlugins, $translatorTests);
+        $notification = new PluginUpdateNotification($this->manyPluginUpdates);
         $expectedText = "The following plugins have updates available: ORCID Profile, Backup, Default Translation";
-        $this->assertEquals($expectedText, $notification->getNotificationText('en_US'));
+        Locale::setLocale('en');
+        self::assertEquals($expectedText, $notification->getNotificationText());
     }
 }
