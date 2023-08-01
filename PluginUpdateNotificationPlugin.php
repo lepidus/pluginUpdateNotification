@@ -57,7 +57,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         $pluginsToUpdate = $this->getUpgradablePlugins();
         if (!empty($pluginsToUpdate)) {
             $smarty->assign([
-                'notificationText' => PluginUpdateNotification::getNotificationText($pluginsToUpdate)
+                'stringPlugins' => implode(", ", $pluginsToUpdate)
             ]);
             $output .= sprintf('%s', $smarty->fetch($this->getTemplateResource('updateNotificationPlugins.tpl')));
         }

@@ -6,7 +6,8 @@
  *}
 
 <div id="pluginUpdateNotification" class="pkp_notification">
-    {include file="controllers/notification/inPlaceNotificationContent.tpl" notificationId="pluginsUpgradeWarning-"|uniqid notificationStyleClass="notifyWarning" notificationTitle="common.warning"|translate notificationContents=$notificationText}
+    {assign var="localeKey" value="plugins.generic.pluginUpdateNotification.messageNotification"}
+    {include file="controllers/notification/inPlaceNotificationContent.tpl" notificationId="pluginsUpgradeWarning-"|uniqid notificationStyleClass="notifyWarning" notificationTitle="common.warning"|translate notificationContents=$localeKey|translate:stringPlugins:$stringPlugins}
 </div>
 
 <script>
