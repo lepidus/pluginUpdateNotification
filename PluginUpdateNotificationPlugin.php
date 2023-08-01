@@ -55,7 +55,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         $output =& $params[2];
 
         $pluginsToUpdate = $this->getUpgradablePlugins();
-        if(!empty($pluginsToUpdate)) {
+        if (!empty($pluginsToUpdate)) {
             $notification = new PluginUpdateNotification($pluginsToUpdate);
             $smarty->assign([
                 'notificationText' => $notification->getNotificationText()
@@ -70,8 +70,8 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         $pluginsGallery = $pluginGalleryDao->getNewestCompatible(Application::get());
         $updatePluginsNames = array();
 
-        foreach($pluginsGallery as $plugin) {
-            if($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
+        foreach ($pluginsGallery as $plugin) {
+            if ($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
                 $updatePluginsNames[] = $plugin->getLocalizedName();
             }
         }
