@@ -2,25 +2,15 @@
 
 namespace APP\plugins\generic\pluginUpdateNotification\classes;
 
-use PKP\facades\Locale;
-
 class PluginUpdateNotification
 {
-    private $upgradeablePlugins;
-
-    public function __construct($pluginsList)
+    public static function getNotificationText(array $pluginsList): string
     {
-        $this->upgradeablePlugins = $pluginsList;
-    }
-
-    public function getNotificationText($locale = null)
-    {
-        $stringPlugins = implode(", ", $this->upgradeablePlugins);
-
-        if (is_null($locale)) {
-            $locale = Locale::getLocale();
+        if (empty($pluginsList)) {
+            throw new \Exception('The list of plugin names is empty');
+        } else {
+            $pluginsString = implode(", ", $pluginsList);
+            return __('plugins.generic.pluginUpdateNotification.messageNotification', ['stringPlugins' => $pluginsString]);
         }
-
-        return __('plugins.generic.pluginUpdateNotification.messageNotification', ['stringPlugins' => $stringPlugins], $locale);
     }
 }

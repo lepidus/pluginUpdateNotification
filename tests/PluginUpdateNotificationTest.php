@@ -8,38 +8,32 @@ use PKP\facades\Locale;
 
 class PluginUpdateNotificationTest extends PKPTestCase
 {
-    private $onePluginUpdate = ["ORCID Profile"];
-    private $manyPluginUpdates = ["ORCID Profile", "Backup", "Default Translation"];
-
-    public function testOneNotificationUpdate(): void
+    public function setUp(): void
     {
-        $notification = new PluginUpdateNotification($this->onePluginUpdate);
-        $expectedText = "Os seguintes plugins possuem atualizações disponíveis: ORCID Profile";
-        Locale::setLocale('pt_BR');
-        self::assertEquals($expectedText, $notification->getNotificationText());
+        parent::setUp();
+        Locale::setLocale("en");
     }
 
-    public function testManyNotificationUpdates(): void
+    public function testOneUpdateNotification(): void
     {
-        $notification = new PluginUpdateNotification($this->manyPluginUpdates);
-        $expectedText = "Os seguintes plugins possuem atualizações disponíveis: ORCID Profile, Backup, Default Translation";
-        Locale::setLocale('pt_BR');
-        self::assertEquals($expectedText, $notification->getNotificationText());
+        $pluginToUpdate = ["ORCID Profile"];
+        $notificationText = PluginUpdateNotification::getNotificationText($pluginToUpdate);
+        $expected = __('plugins.generic.pluginUpdateNotification.messageNotification', ['stringPlugins' => $pluginToUpdate]);
+        self::assertEquals($expected, $notificationText);
     }
 
-    public function testOneNotificationUpdateTranslated(): void
+    public function testManyUpdatesNotification(): void
     {
-        $notification = new PluginUpdateNotification($this->onePluginUpdate);
-        $expectedText = "The following plugins have updates available: ORCID Profile";
-        Locale::setLocale('en');
-        self::assertEquals($expectedText, $notification->getNotificationText());
+        $pluginsToUpdate = ["ORCID Profile", "Backup", "Default Translation"];
+        $notificationText = PluginUpdateNotification::getNotificationText($pluginsToUpdate);
+        $expected = __('plugins.generic.pluginUpdateNotification.messageNotification', ['stringPlugins' => $pluginsToUpdate]);
+        self::assertEquals($expected, $notificationText);
     }
 
-    public function testManyUpdateNotificationTranslated(): void
+    public function testThrowExceptionIfPluginsListIsEmpty(): void
     {
-        $notification = new PluginUpdateNotification($this->manyPluginUpdates);
-        $expectedText = "The following plugins have updates available: ORCID Profile, Backup, Default Translation";
-        Locale::setLocale('en');
-        self::assertEquals($expectedText, $notification->getNotificationText());
+        self::expectException(\Exception::class);
+        self::expectExceptionMessage('The list of plugin names is empty');
+        PluginUpdateNotification::getNotificationText(array());
     }
 }
