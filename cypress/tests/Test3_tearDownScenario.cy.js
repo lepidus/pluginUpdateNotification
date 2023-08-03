@@ -1,9 +1,5 @@
 import '../support/commands';
 
-Cypress.Commands.add('uninstallDoiInSummary', () => {
-	
-});
-
 describe('Tear down scenario', function () {
 	it ('uninstalls the doiInSummary plugin', function () {
 		cy.goToPluginSettings();
