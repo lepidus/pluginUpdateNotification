@@ -18,7 +18,6 @@ describe('Setup scenario', function () {
 		cy.goToPluginSettings();
 		cy.get('.pkp_linkaction_upload').contains('Upload A New Plugin').click();
 		cy.get('#plupload-pkpUploaderDropZone').selectFile(fileName, { action: 'drag-drop' });
-		cy.wait(1000);
 		cy.get('.pkp_uploader_details').contains('doiInSummary.tar.gz');
 		cy.get('.submitFormButton').contains('Save').click();
 		cy.get('div').contains('Successfully installed version 1.3.1.0');
