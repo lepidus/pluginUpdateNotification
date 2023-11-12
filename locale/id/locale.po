@@ -15,7 +15,7 @@ msgid "plugins.generic.pluginUpdateNotification.displayName"
 msgstr "Plugin update notification"
 
 msgid "plugins.generic.pluginUpdateNotification.description"
-msgstr " Plugin ini menghasilkan pemberitahuan setiap kali pembaruan ke plugin galeri tersedia."
+msgstr "Plugin ini menghasilkan pemberitahuan setiap kali pembaruan ke plugin galeri tersedia."
 
 msgid "plugins.generic.pluginUpdateNotification.messageNotification"
-msgstr " Plugin berikut memiliki pembaruan yang tersedia: {$stringPlugins}"
+msgstr "Plugin berikut memiliki pembaruan yang tersedia: {$stringPlugins}"
