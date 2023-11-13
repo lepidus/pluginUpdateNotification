@@ -51,8 +51,8 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
 
     public function websiteSettingsCallback($hookName, $params)
     {
-        $smarty =& $params[1];
-        $output =& $params[2];
+        $smarty = &$params[1];
+        $output = &$params[2];
 
         $pluginsToUpdate = $this->getUpgradablePlugins();
         if (!empty($pluginsToUpdate)) {
