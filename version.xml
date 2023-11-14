@@ -13,7 +13,7 @@
 	<application>pluginUpdateNotification</application>
 	<type>plugins.generic</type>
 	<lazy-load>0</lazy-load>
-	<release>2.0.0.0</release>
-	<date>2023-08-01</date>
+	<release>2.0.1.0</release>
+	<date>2023-11-14</date>
   <class>PluginUpdateNotificationPlugin</class>
 </version>
