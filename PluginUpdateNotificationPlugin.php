@@ -17,10 +17,10 @@ namespace APP\plugins\generic\pluginUpdateNotification;
 
 use PKP\plugins\Hook;
 use PKP\plugins\GenericPlugin;
+use PKP\plugins\GalleryPlugin;
 use PKP\config\Config;
 use PKP\db\DAORegistry;
 use APP\core\Application;
-use APP\plugins\generic\pluginUpdateNotification\classes\PluginUpdateNotification;
 
 class PluginUpdateNotificationPlugin extends GenericPlugin
 {
@@ -61,6 +61,8 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
             ]);
             $output .= sprintf('%s', $smarty->fetch($this->getTemplateResource('updateNotificationPlugins.tpl')));
         }
+
+        return false;
     }
 
     private function getUpgradablePlugins()
@@ -70,7 +72,7 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         $updatePluginsNames = array();
 
         foreach ($pluginsGallery as $plugin) {
-            if ($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
+            if ($plugin->getCurrentStatus() == GalleryPlugin::PLUGIN_GALLERY_STATE_UPGRADABLE) {
                 $updatePluginsNames[] = $plugin->getLocalizedName();
             }
         }
