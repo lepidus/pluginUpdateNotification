@@ -9,3 +9,15 @@ include:
       - 'templates/groups/ojs/cypress_tests.yml'
       - 'templates/groups/ops/cypress_tests.yml'
       - 'templates/groups/omp/cypress_tests.yml'
+
+ojs_integration_tests:
+  rules:
+    - when: never
+
+ops_integration_tests:
+  rules:
+    - when: never
+
+omp_integration_tests:
+  rules:
+    - when: never
