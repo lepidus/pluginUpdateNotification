@@ -5,6 +5,7 @@ This plugin generates a notification in `Settings`>` Website` informing all the 
 ## Compatibility
 
 This plugin is compatible with **OJS**, **OPS** and **OMP** in the following versions:
+* 3.5.0
 * 3.4.0
 * 3.3.0
 * 3.2.1

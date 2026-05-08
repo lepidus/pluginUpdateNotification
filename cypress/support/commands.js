@@ -16,9 +16,9 @@ Cypress.Commands.add('loginAdmin', () => {
 
 Cypress.Commands.add('goToWebsiteSettings', () => {
 	cy.loginAdmin();
-	cy.get('.app__nav a')
+	cy.get('nav')
 		.contains('Website')
-		.click();
+		.click( {force: true});
 });
 
 Cypress.Commands.add('goToPluginSettings', () => {

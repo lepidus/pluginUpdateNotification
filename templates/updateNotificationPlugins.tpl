@@ -5,20 +5,16 @@
  *
  *}
 
-<div id="pluginUpdateNotification" class="pkp_notification">
-    {assign var="localeKey" value="plugins.generic.pluginUpdateNotification.messageNotification"}
-    {include file="controllers/notification/inPlaceNotificationContent.tpl" notificationId="pluginsUpgradeWarning-"|uniqid notificationStyleClass="notifyWarning" notificationTitle="common.warning"|translate notificationContents=$localeKey|translate:stringPlugins:$stringPlugins}
-</div>
+<notification id="pluginUpdateNotification" type="warning" class="pkpNotification--backendPage__header">
+    <strong>{translate key="common.warning"}</strong>
+    {translate key="plugins.generic.pluginUpdateNotification.messageNotification" stringPlugins=$stringPlugins}
+</notification>
 
 <script>
-    var div = document.getElementById('pluginUpdateNotification');
-    var title = document.getElementsByClassName('pkp_page_title')[0];
-    
-    if(!title){ldelim}
-        title = document.getElementsByClassName('app__pageHeading')[0];
+    var notification = document.getElementById('pluginUpdateNotification');
+    var title = document.getElementsByClassName('app__pageHeading')[0];
+
+    if (notification && title && title.parentNode) {ldelim}
+        title.parentNode.insertBefore(notification, title.nextSibling);
     {rdelim}
-    
-    title.parentNode.insertBefore(div, title.nextSibling);
 </script>
-
-
