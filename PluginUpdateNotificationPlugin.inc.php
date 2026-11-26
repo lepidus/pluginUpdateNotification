@@ -48,13 +48,13 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
 
     public function checkUpdatesPlugins($hookName, $params)
     {
-        $smarty =& $params[1];
-        $output =& $params[2];
+        $smarty = & $params[1];
+        $output = & $params[2];
         $locale = AppLocale::getLocale();
 
         $updatePluginsNames = $this->getUpdatePlugins();
 
-        if(!empty($updatePluginsNames)) {
+        if (!empty($updatePluginsNames)) {
             $tradutor = new NotificationTranslatorPKP();
             $notification = new PluginUpdateNotification($updatePluginsNames, $tradutor);
             $smarty->assign([

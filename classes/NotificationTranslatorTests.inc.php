@@ -20,7 +20,7 @@ class NotificationTranslatorTests implements NotificationTranslator
     public function translate($key, $locale, $params = null)
     {
         $mapping = $this->mappingTranslation[$locale];
-        if($params) {
+        if ($params) {
             return str_replace("?", $params['stringPlugins'], $mapping[$key]);
         }
 
