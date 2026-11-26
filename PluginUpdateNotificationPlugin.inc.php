@@ -17,6 +17,7 @@ import('lib.pkp.classes.plugins.GenericPlugin');
 import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslator');
 import('plugins.generic.pluginUpdateNotification.classes.NotificationTranslatorPKP');
 import('plugins.generic.pluginUpdateNotification.classes.PluginUpdateNotification');
+import('plugins.generic.pluginUpdateNotification.classes.UpgradablePluginsFinder');
 
 class PluginUpdateNotificationPlugin extends GenericPlugin
 {
@@ -65,16 +66,8 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
 
     private function getUpdatePlugins()
     {
-        $pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
-        $pluginsGallery = $pluginGalleryDao->getNewestCompatible(Application::get());
-        $updatePluginsNames = array();
+        $upgradablePluginsFinder = new UpgradablePluginsFinder(DAORegistry::getDAO('PluginGalleryDAO'));
 
-        foreach($pluginsGallery as $plugin) {
-            if($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
-                $updatePluginsNames[] = $plugin->getLocalizedName();
-            }
-        }
-
-        return $updatePluginsNames;
+        return $upgradablePluginsFinder->getUpgradablePluginNames(Application::get());
     }
 }

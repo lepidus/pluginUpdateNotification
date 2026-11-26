@@ -12,6 +12,7 @@ spl_autoload_register(
                 'notificationtranslator' => '/NotificationTranslator.inc.php',
                 'notificationtranslatortests' => '/NotificationTranslatorTests.inc.php',
                 'notificationtranslatorpkp' => '/NotificationTranslatorPKP.inc.php',
+                'upgradablepluginsfinder' => '/UpgradablePluginsFinder.inc.php',
             );
         }
         $cn = strtolower($class);
