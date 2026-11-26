@@ -20,6 +20,7 @@ use PKP\plugins\GenericPlugin;
 use PKP\config\Config;
 use PKP\db\DAORegistry;
 use APP\core\Application;
+use Throwable;
 use APP\plugins\generic\pluginUpdateNotification\classes\PluginUpdateNotification;
 
 class PluginUpdateNotificationPlugin extends GenericPlugin
@@ -63,19 +64,35 @@ class PluginUpdateNotificationPlugin extends GenericPlugin
         }
     }
 
+    /**
+     * Failures to consult the plugin gallery (network, timeout or invalid response)
+     * are logged and result in no notification, so they never break the page.
+     *
+     * @return string[]
+     */
     private function getUpgradablePlugins()
     {
-        $pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
-        $pluginsGallery = $pluginGalleryDao->getNewestCompatible(Application::get());
-        $updatePluginsNames = array();
+        try {
+            $pluginGalleryDao = DAORegistry::getDAO('PluginGalleryDAO');
+            $pluginsGallery = $pluginGalleryDao->getNewestCompatible(Application::get());
+            $updatePluginsNames = array();
 
-        foreach ($pluginsGallery as $plugin) {
-            if ($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
-                $updatePluginsNames[] = $plugin->getLocalizedName();
+            foreach ($pluginsGallery as $plugin) {
+                if ($plugin->getCurrentStatus() == PLUGIN_GALLERY_STATE_UPGRADABLE) {
+                    $updatePluginsNames[] = $plugin->getLocalizedName();
+                }
             }
-        }
 
-        return $updatePluginsNames;
+            return $updatePluginsNames;
+        } catch (Throwable $exception) {
+            error_log(sprintf(
+                'pluginUpdateNotification: could not check the plugin gallery for updates (%s): %s',
+                get_class($exception),
+                $exception->getMessage()
+            ));
+
+            return array();
+        }
     }
 }
 
